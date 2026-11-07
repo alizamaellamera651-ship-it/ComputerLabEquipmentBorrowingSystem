@@ -10,22 +10,29 @@ public class BorrowingService implements IBorrowingService {
 
     private BorrowingRepository borrowingRepository;
 
+    private int transactionCounter = 1;
     // Constructor
     public BorrowingService(BorrowingRepository borrowingRepository) {
         this.borrowingRepository = borrowingRepository;
     }
 
-    // Record a borrowing transaction
-    @Override
-    public void borrowEquipment(BorrowingTransaction transaction) {
+    // Record a borrowing transaction with automatic Transaction ID
+@Override
+public void borrowEquipment(BorrowingTransaction transaction) {
 
-        if (transaction == null) {
-            System.out.println("Invalid borrowing transaction.");
-            return;
-        }
-
-        borrowingRepository.addTransaction(transaction);
+    if (transaction == null) {
+        System.out.println("Invalid borrowing transaction.");
+        return;
     }
+
+    String transactionId = String.format("TR-%04d", transactionCounter++);
+
+    transaction.setTransactionId(transactionId);
+
+    borrowingRepository.addTransaction(transaction);
+
+    System.out.println("Transaction ID: " + transactionId);
+}
 
     // Record equipment return
     @Override
@@ -49,8 +56,10 @@ public class BorrowingService implements IBorrowingService {
             return false;
         }
 
-        transaction.setReturnDate(LocalDate.now());
-        transaction.setStatus("Returned");
+        transaction.getEquipment().returnItem();
+
+transaction.setReturnDate(LocalDate.now());
+transaction.setStatus("Returned");
 
         System.out.println("Equipment successfully returned.");
 

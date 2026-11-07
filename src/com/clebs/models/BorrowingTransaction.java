@@ -51,6 +51,10 @@ public String getStatus() {
 }
 
 // Setters
+public void setTransactionId(String transactionId) {
+    this.transactionId = transactionId;
+}
+
 public void setReturnDate(LocalDate returnDate) {
     this.returnDate = returnDate;
 }
