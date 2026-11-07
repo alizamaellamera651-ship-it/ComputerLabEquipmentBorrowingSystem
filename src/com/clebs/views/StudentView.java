@@ -2,6 +2,7 @@ package com.clebs.views;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 import com.clebs.controllers.EquipmentController;
 import com.clebs.controllers.BorrowingController;
@@ -101,29 +102,44 @@ public class StudentView {
     }
 
     // Borrow equipment
-    private void borrowEquipment() {
+private void borrowEquipment() {
 
-        viewAvailableEquipment();
+    viewAvailableEquipment();
 
-        System.out.print("\nEnter Equipment ID: ");
-        String equipmentId = scanner.nextLine();
+    System.out.print("\nEnter Equipment ID: ");
+    String equipmentId = scanner.nextLine();
 
-        Equipment equipment =
-                equipmentController.searchEquipment(equipmentId);
+    Equipment equipment =
+            equipmentController.searchEquipment(equipmentId);
 
-        if (equipment == null || !equipment.isAvailable()) {
-            System.out.println("Equipment not found or unavailable.");
-            return;
-        }
-
-        System.out.println("Equipment found: "
-                + equipment.getEquipmentName());
-
-        System.out.println("Please ask the laboratory administrator "
-                + "to record and approve your borrowing transaction.");
-
+    if (equipment == null) {
+        System.out.println("Equipment not found.");
+        return;
     }
 
+    if (!equipment.isAvailable()) {
+        System.out.println("Equipment is unavailable.");
+        return;
+    }
+
+    // Create borrowing transaction
+    BorrowingTransaction transaction =
+            new BorrowingTransaction(
+                    null,
+                    student,
+                    equipment,
+                    LocalDate.now(),
+                    null,
+                    "Borrowed"
+            );
+
+    // Record borrowing transaction
+    borrowingController.borrowEquipment(transaction);
+
+    System.out.println("\nBorrowing successful!");
+    System.out.println("Your Transaction ID: "
+            + transaction.getTransactionId());
+}
     // View borrowing history
     private void viewBorrowingHistory() {
 

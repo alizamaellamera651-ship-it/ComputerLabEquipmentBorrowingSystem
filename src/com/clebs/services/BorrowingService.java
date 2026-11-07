@@ -17,21 +17,37 @@ public class BorrowingService implements IBorrowingService {
     }
 
     // Record a borrowing transaction with automatic Transaction ID
+// Record a borrowing transaction with automatic Transaction ID
 @Override
 public void borrowEquipment(BorrowingTransaction transaction) {
 
-    if (transaction == null) {
+    if (transaction == null
+            || transaction.getStudent() == null
+            || transaction.getEquipment() == null) {
+
         System.out.println("Invalid borrowing transaction.");
         return;
     }
 
-    String transactionId = String.format("TR-%04d", transactionCounter++);
+    if (!transaction.getEquipment().isAvailable()) {
+        System.out.println("Equipment is unavailable.");
+        return;
+    }
+
+    // Decrease available equipment quantity
+    transaction.getEquipment().borrowItem();
+
+    // Generate automatic Transaction ID
+    String transactionId =
+            String.format("TR-%04d", transactionCounter++);
 
     transaction.setTransactionId(transactionId);
 
+    // Save transaction
     borrowingRepository.addTransaction(transaction);
 
     System.out.println("Transaction ID: " + transactionId);
+    System.out.println("Borrowing successfully recorded.");
 }
 
     // Record equipment return
