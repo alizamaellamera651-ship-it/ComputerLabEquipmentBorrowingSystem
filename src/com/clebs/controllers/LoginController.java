@@ -1,32 +1,33 @@
 package com.clebs.controllers;
 
 import com.clebs.models.User;
-import com.clebs.repositories.UserRepository;
 import com.clebs.services.UserService;
 
 public class LoginController {
 
+    private UserService userService;
 
-private UserService userService;
+    // Constructor
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
-// Constructor
-public LoginController() {
-    UserRepository userRepository = new UserRepository();
-    userService = new UserService(userRepository);
-}
+    // Handle user login
+    public User login(String username, String password) {
 
-// Handle user login
-public User login(String username, String password) {
+        User user = userService.login(username, password);
 
-    User user = userService.login(username, password);
+        if (user != null) {
+            System.out.println("Access granted.");
+            return user;
+        }
 
-    return user;
-}
+        System.out.println("Access denied.");
+        return null;
+    }
 
-// Handle logout
-public void logout() {
-    userService.logout();
-}
-
-
+    // Handle user logout
+    public void logout() {
+        userService.logout();
+    }
 }
