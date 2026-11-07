@@ -3,7 +3,6 @@ package com.clebs.controllers;
 import java.util.ArrayList;
 
 import com.clebs.models.BorrowingTransaction;
-import com.clebs.repositories.BorrowingRepository;
 import com.clebs.services.BorrowingService;
 
 public class BorrowingController {
@@ -11,17 +10,16 @@ public class BorrowingController {
     private BorrowingService borrowingService;
 
     // Constructor
-    public BorrowingController() {
-        BorrowingRepository borrowingRepository = new BorrowingRepository();
-        borrowingService = new BorrowingService(borrowingRepository);
+    public BorrowingController(BorrowingService borrowingService) {
+        this.borrowingService = borrowingService;
     }
 
-    // Borrow equipment
+    // Record a borrowing transaction
     public void borrowEquipment(BorrowingTransaction transaction) {
         borrowingService.borrowEquipment(transaction);
     }
 
-    // Return equipment
+    // Record equipment return
     public boolean returnEquipment(String transactionId) {
         return borrowingService.returnEquipment(transactionId);
     }
