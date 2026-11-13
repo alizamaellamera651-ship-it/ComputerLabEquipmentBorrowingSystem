@@ -74,7 +74,6 @@ public void setCondition(String condition) {
 public void borrowItem() {
     if (quantity > 0) {
         quantity--;
-        System.out.println(equipmentName + " successfully borrowed.");
     } else {
         System.out.println(equipmentName + " is unavailable.");
     }
