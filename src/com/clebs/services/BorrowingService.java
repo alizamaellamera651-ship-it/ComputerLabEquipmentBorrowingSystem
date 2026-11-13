@@ -16,7 +16,7 @@ public class BorrowingService implements IBorrowingService {
         this.borrowingRepository = borrowingRepository;
     }
 
-    // Record a borrowing transaction with automatic Transaction ID
+   
 // Record a borrowing transaction with automatic Transaction ID
 @Override
 public void borrowEquipment(BorrowingTransaction transaction) {
@@ -77,8 +77,7 @@ public void borrowEquipment(BorrowingTransaction transaction) {
 transaction.setReturnDate(LocalDate.now());
 transaction.setStatus("Returned");
 
-        System.out.println("Equipment successfully returned.");
-
+      
         return true;
     }
 
