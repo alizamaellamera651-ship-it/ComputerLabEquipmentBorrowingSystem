@@ -15,9 +15,9 @@ public class EquipmentController {
     }
 
     // Add equipment
-    public void addEquipment(Equipment equipment) {
-        equipmentService.addEquipment(equipment);
-    }
+    public boolean addEquipment(Equipment equipment) {
+    return equipmentService.addEquipment(equipment);
+}
 
     // View all equipment
     public ArrayList<Equipment> getAllEquipment() {

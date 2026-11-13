@@ -99,39 +99,43 @@ public class AdministratorView {
         }
     }
 
-    // Add equipment
-    private void addEquipment() {
+  
+   // Add equipment
+private void addEquipment() {
 
-        System.out.println("\n========== ADD EQUIPMENT ==========");
+    System.out.println("\n========== ADD EQUIPMENT ==========");
 
-        System.out.print("Equipment ID: ");
-        String id = scanner.nextLine();
+    System.out.print("Equipment ID: ");
+    String id = scanner.nextLine();
 
-        System.out.print("Equipment Name: ");
-        String name = scanner.nextLine();
+    System.out.print("Equipment Name: ");
+    String name = scanner.nextLine();
 
-        System.out.print("Category: ");
-        String category = scanner.nextLine();
+    System.out.print("Category: ");
+    String category = scanner.nextLine();
 
-        System.out.print("Quantity: ");
-        int quantity = readChoice();
+    System.out.print("Quantity: ");
+    int quantity = readChoice();
 
-        if (quantity < 0) {
-            System.out.println("Invalid quantity.");
-            return;
-        }
-
-        System.out.print("Condition: ");
-        String condition = scanner.nextLine();
-
-        Equipment equipment = new Equipment(
-                id, name, category, quantity, condition);
-
-        equipmentController.addEquipment(equipment);
-
-        System.out.println("Equipment added successfully.");
+    if (quantity < 0) {
+        System.out.println("Invalid quantity.");
+        return;
     }
 
+    System.out.print("Condition: ");
+    String condition = scanner.nextLine();
+
+    Equipment equipment = new Equipment(
+            id, name, category, quantity, condition);
+
+    boolean added = equipmentController.addEquipment(equipment);
+
+    if (added) {
+        System.out.println("Equipment added successfully.");
+    } else {
+        System.out.println("Unable to add equipment.");
+    }
+}
     // Update equipment
     private void updateEquipment() {
 

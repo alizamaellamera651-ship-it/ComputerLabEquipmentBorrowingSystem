@@ -12,10 +12,9 @@ public EquipmentRepository() {
     equipmentList = new ArrayList<>();
 }
 
-// Add equipment
+/// Add equipment
 public void addEquipment(Equipment equipment) {
     equipmentList.add(equipment);
-    System.out.println("Equipment successfully added.");
 }
 
 // View all equipment
