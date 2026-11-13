@@ -236,13 +236,14 @@ private void deleteEquipment() {
     }
 
     // Read menu choice
-    private int readChoice() {
+private int readChoice() {
 
-        try {
-            return Integer.parseInt(scanner.nextLine());
+    try {
+        return Integer.parseInt(scanner.nextLine().trim());
 
-        } catch (NumberFormatException e) {
-            return -1;
-        }
+    } catch (NumberFormatException e) {
+        System.out.println("Invalid input. Please enter a number.");
+        return -1;
     }
+}
 }
