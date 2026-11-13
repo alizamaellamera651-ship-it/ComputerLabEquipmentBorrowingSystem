@@ -135,9 +135,8 @@ public class Main {
         // 7. MAIN SYSTEM LOOP
         // ==================================
 
-        boolean running = true;
 
-        while (running) {
+       while (!loginView.isExitRequested()) {
 
             User loggedInUser = loginView.displayLogin();
 
@@ -165,10 +164,10 @@ public class Main {
 
                 loginController.logout();
 
-            } else {
+            } else if (!loginView.isExitRequested()) {
 
-                System.out.println("\nLogin failed. Please try again.");
-            }
+    System.out.println("\nLogin failed. Please try again.");
+}
 
         }
     }
