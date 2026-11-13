@@ -96,38 +96,59 @@ for (Equipment existingEquipment : equipmentRepository.getAllEquipment()) {
     }
 
     // Update equipment
-    public boolean updateEquipment(String equipmentId, String name,
-                                   String category, int quantity,
-                                   String condition) {
+public boolean updateEquipment(String equipmentId, String name,
+                               String category, int quantity,
+                               String condition) {
 
-        if (equipmentId == null || equipmentId.trim().isEmpty()) {
-            System.out.println("Equipment ID cannot be empty.");
-            return false;
-        }
-
-        if (name == null || name.trim().isEmpty()) {
-            System.out.println("Equipment name cannot be empty.");
-            return false;
-        }
-
-        if (category == null || category.trim().isEmpty()) {
-            System.out.println("Category cannot be empty.");
-            return false;
-        }
-
-        if (condition == null || condition.trim().isEmpty()) {
-            System.out.println("Condition cannot be empty.");
-            return false;
-        }
-
-        if (quantity < 0) {
-            System.out.println("Quantity cannot be negative.");
-            return false;
-        }
-
-        return equipmentRepository.updateEquipment(
-                equipmentId, name, category, quantity, condition);
+    if (equipmentId == null || equipmentId.trim().isEmpty()) {
+        System.out.println("Equipment ID cannot be empty.");
+        return false;
     }
+
+    if (name == null || name.trim().isEmpty()) {
+        System.out.println("Equipment name cannot be empty.");
+        return false;
+    }
+
+    if (category == null || category.trim().isEmpty()) {
+        System.out.println("Category cannot be empty.");
+        return false;
+    }
+
+    if (condition == null || condition.trim().isEmpty()) {
+        System.out.println("Condition cannot be empty.");
+        return false;
+    }
+
+    if (quantity < 0) {
+        System.out.println("Quantity cannot be negative.");
+        return false;
+    }
+
+    // Check if equipment exists
+    Equipment equipment =
+            equipmentRepository.findEquipmentById(equipmentId);
+
+    if (equipment == null) {
+        System.out.println("Equipment not found.");
+        return false;
+    }
+
+    // Check for duplicate equipment names
+    for (Equipment existingEquipment : equipmentRepository.getAllEquipment()) {
+
+        if (!existingEquipment.getEquipmentId().equalsIgnoreCase(equipmentId)
+                && existingEquipment.getEquipmentName().trim()
+                .equalsIgnoreCase(name.trim())) {
+
+            System.out.println("Equipment name already exists.");
+            return false;
+        }
+    }
+
+    return equipmentRepository.updateEquipment(
+            equipmentId, name, category, quantity, condition);
+}
 
     // Delete equipment
 public boolean deleteEquipment(String equipmentId) {
