@@ -4,15 +4,21 @@ import java.util.ArrayList;
 
 import com.clebs.models.Equipment;
 import com.clebs.repositories.EquipmentRepository;
+import com.clebs.repositories.BorrowingRepository;
 
 public class EquipmentService {
 
+    private BorrowingRepository borrowingRepository;
     private EquipmentRepository equipmentRepository;
 
     // Constructor
-    public EquipmentService(EquipmentRepository equipmentRepository) {
-        this.equipmentRepository = equipmentRepository;
-    }
+public EquipmentService(
+        EquipmentRepository equipmentRepository,
+        BorrowingRepository borrowingRepository) {
+
+    this.equipmentRepository = equipmentRepository;
+    this.borrowingRepository = borrowingRepository;
+}
 
     // Add equipment
 public boolean addEquipment(Equipment equipment) {
@@ -113,13 +119,35 @@ public boolean addEquipment(Equipment equipment) {
     }
 
     // Delete equipment
-    public boolean deleteEquipment(String equipmentId) {
+public boolean deleteEquipment(String equipmentId) {
 
-        if (equipmentId == null || equipmentId.trim().isEmpty()) {
-            System.out.println("Equipment ID cannot be empty.");
+    if (equipmentId == null || equipmentId.trim().isEmpty()) {
+        System.out.println("Equipment ID cannot be empty.");
+        return false;
+    }
+
+    Equipment equipment =
+            equipmentRepository.findEquipmentById(equipmentId);
+
+    if (equipment == null) {
+        System.out.println("Equipment not found.");
+        return false;
+    }
+
+    for (com.clebs.models.BorrowingTransaction transaction :
+            borrowingRepository.getAllTransactions()) {
+
+        if (transaction.getEquipment().getEquipmentId()
+                .equalsIgnoreCase(equipmentId)
+                && transaction.getStatus().equalsIgnoreCase("Borrowed")) {
+
+            System.out.println(
+                    "Cannot delete equipment. It is currently borrowed."
+            );
             return false;
         }
-
-        return equipmentRepository.deleteEquipment(equipmentId);
     }
+
+    return equipmentRepository.deleteEquipment(equipmentId);
+}
 }

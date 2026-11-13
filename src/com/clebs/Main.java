@@ -42,8 +42,11 @@ public class Main {
         UserService userService =
                 new UserService(userRepository);
 
-        EquipmentService equipmentService =
-                new EquipmentService(equipmentRepository);
+       EquipmentService equipmentService =
+        new EquipmentService(
+                equipmentRepository,
+                borrowingRepository
+        );
 
         BorrowingService borrowingService =
                 new BorrowingService(borrowingRepository);
