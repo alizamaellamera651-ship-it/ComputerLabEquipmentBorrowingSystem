@@ -63,6 +63,17 @@ public boolean addEquipment(Equipment equipment) {
         return false;
     }
 
+    // Check for duplicate equipment name
+for (Equipment existingEquipment : equipmentRepository.getAllEquipment()) {
+
+    if (existingEquipment.getEquipmentName().trim()
+            .equalsIgnoreCase(equipment.getEquipmentName().trim())) {
+
+        System.out.println("Equipment name already exists.");
+        return false;
+    }
+}
+
     equipmentRepository.addEquipment(equipment);
 
     return true;
