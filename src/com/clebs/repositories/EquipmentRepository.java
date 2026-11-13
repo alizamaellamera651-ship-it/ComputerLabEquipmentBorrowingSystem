@@ -37,8 +37,8 @@ public Equipment findEquipmentById(String equipmentId) {
 
 // Update equipment
 public boolean updateEquipment(String equipmentId, String newName,
-                              String newCategory, int newQuantity,
-                              String newCondition) {
+                               String newCategory, int newQuantity,
+                               String newCondition) {
 
     Equipment equipment = findEquipmentById(equipmentId);
 
@@ -48,14 +48,11 @@ public boolean updateEquipment(String equipmentId, String newName,
         equipment.setQuantity(newQuantity);
         equipment.setCondition(newCondition);
 
-        System.out.println("Equipment successfully updated.");
         return true;
     }
 
-    System.out.println("Equipment not found.");
     return false;
 }
-
 // Delete equipment
 public boolean deleteEquipment(String equipmentId) {
 
