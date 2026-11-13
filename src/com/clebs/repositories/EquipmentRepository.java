@@ -63,13 +63,10 @@ public boolean deleteEquipment(String equipmentId) {
 
     if (equipment != null) {
         equipmentList.remove(equipment);
-        System.out.println("Equipment successfully deleted.");
         return true;
     }
 
-    System.out.println("Equipment not found.");
     return false;
 }
-
 
 }

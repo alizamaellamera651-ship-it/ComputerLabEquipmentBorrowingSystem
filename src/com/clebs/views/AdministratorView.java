@@ -180,21 +180,26 @@ private void addEquipment() {
     }
 
     // Delete equipment
-    private void deleteEquipment() {
+private void deleteEquipment() {
 
-        System.out.println("\n========== DELETE EQUIPMENT ==========");
+    System.out.println("\n========== DELETE EQUIPMENT ==========");
 
-        System.out.print("Enter Equipment ID: ");
-        String id = scanner.nextLine();
+    System.out.print("Enter Equipment ID: ");
+    String id = scanner.nextLine();
 
-        boolean deleted = equipmentController.deleteEquipment(id);
+    Equipment equipment = equipmentController.searchEquipment(id);
 
-        if (deleted) {
-            System.out.println("Equipment deleted successfully.");
-        } else {
-            System.out.println("Equipment not found.");
-        }
+    if (equipment == null) {
+        System.out.println("Equipment not found.");
+        return;
     }
+
+    boolean deleted = equipmentController.deleteEquipment(id);
+
+    if (deleted) {
+        System.out.println("Equipment deleted successfully.");
+    }
+}
 
     // View all borrowing transactions
     private void viewAllTransactions() {
