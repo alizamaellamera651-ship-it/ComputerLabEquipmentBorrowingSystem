@@ -18,7 +18,12 @@ public Equipment(String equipmentId, String equipmentName,
     this.equipmentId = equipmentId;
     this.equipmentName = equipmentName;
     this.category = category;
+   if (quantity >= 0) {
     this.quantity = quantity;
+} else {
+    this.quantity = 0;
+    System.out.println("Invalid quantity. Default quantity set to 0.");
+}
     this.condition = condition;
 }
 
