@@ -55,7 +55,24 @@ public void setTransactionId(String transactionId) {
     this.transactionId = transactionId;
 }
 
+// Set return date with validation
 public void setReturnDate(LocalDate returnDate) {
+
+    if (returnDate == null) {
+        System.out.println("Return date cannot be empty.");
+        return;
+    }
+
+    if (borrowingDate != null && returnDate.isBefore(borrowingDate)) {
+        System.out.println("Return date cannot be earlier than borrowing date.");
+        return;
+    }
+
+    if (returnDate.isAfter(LocalDate.now())) {
+        System.out.println("Return date cannot be in the future.");
+        return;
+    }
+
     this.returnDate = returnDate;
 }
 
