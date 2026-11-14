@@ -59,8 +59,23 @@ public void setReturnDate(LocalDate returnDate) {
     this.returnDate = returnDate;
 }
 
+// Set transaction status with validation
 public void setStatus(String status) {
-    this.status = status;
+
+    if (status == null || status.trim().isEmpty()) {
+        System.out.println("Transaction status cannot be empty.");
+        return;
+    }
+
+    if (status.equalsIgnoreCase("Borrowed")) {
+        this.status = "Borrowed";
+    } 
+    else if (status.equalsIgnoreCase("Returned")) {
+        this.status = "Returned";
+    } 
+    else {
+        System.out.println("Invalid transaction status.");
+    }
 }
 
 // Display transaction information
