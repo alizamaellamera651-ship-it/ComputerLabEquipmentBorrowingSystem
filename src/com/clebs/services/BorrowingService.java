@@ -29,6 +29,17 @@ public void borrowEquipment(BorrowingTransaction transaction) {
         return;
     }
 
+    // Validate borrowing date
+if (transaction.getBorrowingDate() == null) {
+    System.out.println("Borrowing date cannot be empty.");
+    return;
+}
+
+if (transaction.getBorrowingDate().isAfter(LocalDate.now())) {
+    System.out.println("Borrowing date cannot be in the future.");
+    return;
+}
+
     if (!transaction.getEquipment().isAvailable()) {
         System.out.println("Equipment is unavailable.");
         return;
