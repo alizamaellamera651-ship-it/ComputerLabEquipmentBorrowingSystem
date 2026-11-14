@@ -13,10 +13,33 @@ public BorrowingRepository() {
     transactionList = new ArrayList<>();
 }
 
-// Add transaction
-public void addTransaction(BorrowingTransaction transaction) {
+// Add transaction with validation
+public boolean addTransaction(BorrowingTransaction transaction) {
+
+    if (transaction == null) {
+        System.out.println("Invalid borrowing transaction.");
+        return false;
+    }
+
+    if (transaction.getTransactionId() == null ||
+            transaction.getTransactionId().trim().isEmpty()) {
+        System.out.println("Transaction ID cannot be empty.");
+        return false;
+    }
+
+    // Check for duplicate transaction ID
+    for (BorrowingTransaction existingTransaction : transactionList) {
+
+        if (existingTransaction.getTransactionId()
+                .equalsIgnoreCase(transaction.getTransactionId())) {
+
+            System.out.println("Transaction ID already exists.");
+            return false;
+        }
+    }
+
     transactionList.add(transaction);
-    System.out.println("Borrowing transaction successfully recorded.");
+    return true;
 }
 
 // Get all transactions
