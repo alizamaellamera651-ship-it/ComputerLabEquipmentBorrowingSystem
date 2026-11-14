@@ -22,7 +22,7 @@ public BorrowingTransaction(String transactionId, Student student,
     this.equipment = equipment;
     this.borrowingDate = borrowingDate;
     this.returnDate = returnDate;
-    this.status = status;
+    setStatus(status);
 }
 
 // Getters
