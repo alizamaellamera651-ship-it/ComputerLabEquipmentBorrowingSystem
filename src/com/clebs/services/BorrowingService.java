@@ -77,7 +77,9 @@ for (BorrowingTransaction existingTransaction :
     transaction.setTransactionId(transactionId);
 
     // Save transaction
-    borrowingRepository.addTransaction(transaction);
+    if (!borrowingRepository.addTransaction(transaction)) {
+    return;
+}
 
     System.out.println("Transaction ID: " + transactionId);
     System.out.println("Borrowing successfully recorded.");
