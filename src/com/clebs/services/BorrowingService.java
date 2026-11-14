@@ -34,6 +34,28 @@ public void borrowEquipment(BorrowingTransaction transaction) {
         return;
     }
 
+    // Check for an existing active borrowing transaction
+for (BorrowingTransaction existingTransaction :
+        borrowingRepository.getAllTransactions()) {
+
+    boolean sameStudent =
+            existingTransaction.getStudent().getStudentId()
+            .equalsIgnoreCase(transaction.getStudent().getStudentId());
+
+    boolean sameEquipment =
+            existingTransaction.getEquipment().getEquipmentId()
+            .equalsIgnoreCase(transaction.getEquipment().getEquipmentId());
+
+    boolean stillBorrowed =
+            "Borrowed".equalsIgnoreCase(existingTransaction.getStatus());
+
+    if (sameStudent && sameEquipment && stillBorrowed) {
+        System.out.println(
+                "You have already borrowed this equipment. Please return it first.");
+        return;
+    }
+}
+
     // Decrease available equipment quantity
     transaction.getEquipment().borrowItem();
 
