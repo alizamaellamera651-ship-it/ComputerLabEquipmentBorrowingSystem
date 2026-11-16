@@ -6,16 +6,24 @@ public class LaboratoryAdministrator extends User {
     private String department;
 
     // Constructor
-    public LaboratoryAdministrator(String userId, String fullName,
-                                  String username, String password,
-                                  String employeeId, String department) {
+public LaboratoryAdministrator(String userId, String fullName,
+                               String username, String password,
+                               String employeeId, String department) {
 
-        super(userId, fullName, username, password);
+    super(userId, fullName, username, password);
 
-        this.employeeId = employeeId;
-        this.department = department;
+    // Validate administrator information
+    if (employeeId == null || employeeId.trim().isEmpty()) {
+        throw new IllegalArgumentException("Employee ID cannot be empty.");
     }
 
+    if (department == null || department.trim().isEmpty()) {
+        throw new IllegalArgumentException("Department cannot be empty.");
+    }
+
+    this.employeeId = employeeId.trim();
+    this.department = department.trim();
+}
     // Getters
     public String getEmployeeId() {
         return employeeId;
