@@ -12,9 +12,22 @@ public class Student extends User {
 
         super(userId, fullName, username, password);
 
-        this.studentId = studentId;
-        this.course = course;
-        this.yearLevel = yearLevel;
+        // Validate student information
+if (studentId == null || studentId.trim().isEmpty()) {
+    throw new IllegalArgumentException("Student ID cannot be empty.");
+}
+
+if (course == null || course.trim().isEmpty()) {
+    throw new IllegalArgumentException("Course cannot be empty.");
+}
+
+if (yearLevel == null || yearLevel.trim().isEmpty()) {
+    throw new IllegalArgumentException("Year level cannot be empty.");
+}
+
+this.studentId = studentId.trim();
+this.course = course.trim();
+this.yearLevel = yearLevel.trim();
     }
 
     // Getters
