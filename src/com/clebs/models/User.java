@@ -9,12 +9,29 @@ public abstract class User {
     private String password;
 
     // Constructor
-    public User(String userId, String fullName, String username, String password) {
-        this.userId = userId;
-        this.fullName = fullName;
-        this.username = username;
-        this.password = password;
+public User(String userId, String fullName, String username, String password) {
+
+    if (userId == null || userId.trim().isEmpty()) {
+        throw new IllegalArgumentException("User ID cannot be empty.");
     }
+
+    if (fullName == null || fullName.trim().isEmpty()) {
+        throw new IllegalArgumentException("Full name cannot be empty.");
+    }
+
+    if (username == null || username.trim().isEmpty()) {
+        throw new IllegalArgumentException("Username cannot be empty.");
+    }
+
+    if (password == null || password.trim().isEmpty()) {
+        throw new IllegalArgumentException("Password cannot be empty.");
+    }
+
+    this.userId = userId.trim();
+    this.fullName = fullName.trim();
+    this.username = username.trim();
+    this.password = password;
+}
 
     // Getters
     public String getUserId() {
