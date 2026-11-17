@@ -64,9 +64,11 @@ public String getCondition() {
 
 // Setters
 public void setEquipmentName(String equipmentName) {
-    this.equipmentName = equipmentName;
+    if (equipmentName == null || equipmentName.trim().isEmpty()) {
+        throw new IllegalArgumentException("Equipment name cannot be empty.");
+    }
+    this.equipmentName = equipmentName.trim();
 }
-
 public void setCategory(String category) {
     this.category = category;
 }
