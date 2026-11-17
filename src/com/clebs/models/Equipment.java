@@ -13,20 +13,34 @@ private String condition;
 
 // Constructor
 public Equipment(String equipmentId, String equipmentName,
-                String category, int quantity, String condition) {
+                 String category, int quantity, String condition) {
 
-    this.equipmentId = equipmentId;
-    this.equipmentName = equipmentName;
-    this.category = category;
-   if (quantity >= 0) {
+    if (equipmentId == null || equipmentId.trim().isEmpty()) {
+        throw new IllegalArgumentException("Equipment ID cannot be empty.");
+    }
+
+    if (equipmentName == null || equipmentName.trim().isEmpty()) {
+        throw new IllegalArgumentException("Equipment name cannot be empty.");
+    }
+
+    if (category == null || category.trim().isEmpty()) {
+        throw new IllegalArgumentException("Category cannot be empty.");
+    }
+
+    if (condition == null || condition.trim().isEmpty()) {
+        throw new IllegalArgumentException("Condition cannot be empty.");
+    }
+
+    if (quantity < 0) {
+        throw new IllegalArgumentException("Quantity cannot be negative.");
+    }
+
+    this.equipmentId = equipmentId.trim();
+    this.equipmentName = equipmentName.trim();
+    this.category = category.trim();
     this.quantity = quantity;
-} else {
-    this.quantity = 0;
-    System.out.println("Invalid quantity. Default quantity set to 0.");
+    this.condition = condition.trim();
 }
-    this.condition = condition;
-}
-
 // Getters
 public String getEquipmentId() {
     return equipmentId;
