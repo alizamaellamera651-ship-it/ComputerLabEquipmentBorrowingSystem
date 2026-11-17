@@ -84,7 +84,10 @@ public void setQuantity(int quantity) {
 }
 
 public void setCondition(String condition) {
-    this.condition = condition;
+    if (condition == null || condition.trim().isEmpty()) {
+        throw new IllegalArgumentException("Condition cannot be empty.");
+    }
+    this.condition = condition.trim();
 }
 
 // Borrow equipment
