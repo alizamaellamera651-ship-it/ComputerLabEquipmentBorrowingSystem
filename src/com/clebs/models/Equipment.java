@@ -70,9 +70,11 @@ public void setEquipmentName(String equipmentName) {
     this.equipmentName = equipmentName.trim();
 }
 public void setCategory(String category) {
-    this.category = category;
+    if (category == null || category.trim().isEmpty()) {
+        throw new IllegalArgumentException("Category cannot be empty.");
+    }
+    this.category = category.trim();
 }
-
 public void setQuantity(int quantity) {
     if (quantity >= 0) {
         this.quantity = quantity;
