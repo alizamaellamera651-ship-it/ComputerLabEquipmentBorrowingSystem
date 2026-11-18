@@ -76,13 +76,11 @@ public void setCategory(String category) {
     this.category = category.trim();
 }
 public void setQuantity(int quantity) {
-    if (quantity >= 0) {
-        this.quantity = quantity;
-    } else {
-        System.out.println("Quantity cannot be negative.");
+    if (quantity < 0) {
+        throw new IllegalArgumentException("Quantity cannot be negative.");
     }
+    this.quantity = quantity;
 }
-
 public void setCondition(String condition) {
     if (condition == null || condition.trim().isEmpty()) {
         throw new IllegalArgumentException("Condition cannot be empty.");
