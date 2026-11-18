@@ -2,6 +2,7 @@ package com.clebs;
 
 import com.clebs.models.Student;
 import com.clebs.models.LaboratoryAdministrator;
+import com.clebs.models.BorrowingTransaction;
 import com.clebs.models.Equipment;
 import com.clebs.models.User;
 
@@ -15,6 +16,9 @@ import com.clebs.services.BorrowingService;
 
 import com.clebs.controllers.LoginController;
 import com.clebs.controllers.EquipmentController;
+
+import java.time.LocalDate;
+
 import com.clebs.controllers.BorrowingController;
 
 import com.clebs.views.LoginView;
@@ -169,6 +173,6 @@ public class Main {
     System.out.println("\nLogin failed. Please try again.");
 }
 
-        }
+       }
     }
 }
