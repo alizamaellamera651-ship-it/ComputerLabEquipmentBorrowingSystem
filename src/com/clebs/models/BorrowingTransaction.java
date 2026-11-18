@@ -80,7 +80,12 @@ public String getStatus() {
 
 // Setters
 public void setTransactionId(String transactionId) {
-    this.transactionId = transactionId;
+
+    if (transactionId == null || transactionId.trim().isEmpty()) {
+        throw new IllegalArgumentException("Transaction ID cannot be empty.");
+    }
+
+    this.transactionId = transactionId.trim();
 }
 
 // Set return date with validation
