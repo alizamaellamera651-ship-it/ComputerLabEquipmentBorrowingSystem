@@ -114,20 +114,22 @@ public void setReturnDate(LocalDate returnDate) {
 public void setStatus(String status) {
 
     if (status == null || status.trim().isEmpty()) {
-        System.out.println("Transaction status cannot be empty.");
-        return;
+        throw new IllegalArgumentException(
+            "Transaction status cannot be empty."
+        );
     }
 
     if (status.equalsIgnoreCase("Borrowed")) {
         this.status = "Borrowed";
-    } 
+    }
     else if (status.equalsIgnoreCase("Returned")) {
         this.status = "Returned";
-    } 
+    }
     else {
-        System.out.println("Invalid transaction status.");
+        throw new IllegalArgumentException("Invalid transaction status.");
     }
 }
+
 
 // Display transaction information
 public void displayTransactionInfo() {
