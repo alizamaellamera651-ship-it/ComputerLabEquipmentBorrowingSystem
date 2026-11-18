@@ -17,12 +17,40 @@ public BorrowingTransaction(String transactionId, Student student,
                            Equipment equipment, LocalDate borrowingDate,
                            LocalDate returnDate, String status) {
 
+    if (student == null) {
+        throw new IllegalArgumentException("Student cannot be empty.");
+    }
+
+    if (equipment == null) {
+        throw new IllegalArgumentException("Equipment cannot be empty.");
+    }
+
+    if (borrowingDate == null) {
+        throw new IllegalArgumentException("Borrowing date cannot be empty.");
+    }
+
+    if (borrowingDate.isAfter(LocalDate.now())) {
+        throw new IllegalArgumentException("Borrowing date cannot be in the future.");
+    }
+
     this.transactionId = transactionId;
     this.student = student;
     this.equipment = equipment;
     this.borrowingDate = borrowingDate;
-    this.returnDate = returnDate;
+
+    if (returnDate != null) {
+        setReturnDate(returnDate);
+
+        if (this.returnDate == null) {
+            throw new IllegalArgumentException("Invalid return date.");
+        }
+    }
+
     setStatus(status);
+
+    if (this.status == null) {
+        throw new IllegalArgumentException("Invalid transaction status.");
+    }
 }
 
 // Getters
