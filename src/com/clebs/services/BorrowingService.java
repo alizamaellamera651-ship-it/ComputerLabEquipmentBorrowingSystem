@@ -66,20 +66,20 @@ for (BorrowingTransaction existingTransaction :
         return;
     }
 }
+// Generate automatic Transaction ID
+String transactionId =
+        String.format("TR-%04d", transactionCounter++);
 
-    // Decrease available equipment quantity
-    transaction.getEquipment().borrowItem();
+transaction.setTransactionId(transactionId);
 
-    // Generate automatic Transaction ID
-    String transactionId =
-            String.format("TR-%04d", transactionCounter++);
-
-    transaction.setTransactionId(transactionId);
-
-    // Save transaction
-    if (!borrowingRepository.addTransaction(transaction)) {
+// Save transaction first
+if (!borrowingRepository.addTransaction(transaction)) {
+    System.out.println("Failed to record borrowing transaction.");
     return;
 }
+
+// Decrease available equipment quantity
+transaction.getEquipment().borrowItem();
 
     System.out.println("Transaction ID: " + transactionId);
     System.out.println("Borrowing successfully recorded.");
