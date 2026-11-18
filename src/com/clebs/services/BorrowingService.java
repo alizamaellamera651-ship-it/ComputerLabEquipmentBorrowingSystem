@@ -107,14 +107,19 @@ transaction.getEquipment().borrowItem();
             return false;
         }
 
-        transaction.getEquipment().returnItem();
+        try {
+    transaction.setReturnDate(LocalDate.now());
+    transaction.setStatus("Returned");
 
-transaction.setReturnDate(LocalDate.now());
-transaction.setStatus("Returned");
+    transaction.getEquipment().returnItem();
 
-      
-        return true;
-    }
+    return true;
+
+} catch (IllegalArgumentException e) {
+    System.out.println("Return failed: " + e.getMessage());
+    return false;
+   }
+}
 
     // View all transactions
     @Override
