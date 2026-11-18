@@ -92,18 +92,19 @@ public void setTransactionId(String transactionId) {
 public void setReturnDate(LocalDate returnDate) {
 
     if (returnDate == null) {
-        System.out.println("Return date cannot be empty.");
-        return;
+        throw new IllegalArgumentException("Return date cannot be empty.");
     }
 
     if (borrowingDate != null && returnDate.isBefore(borrowingDate)) {
-        System.out.println("Return date cannot be earlier than borrowing date.");
-        return;
+        throw new IllegalArgumentException(
+            "Return date cannot be earlier than borrowing date."
+        );
     }
 
     if (returnDate.isAfter(LocalDate.now())) {
-        System.out.println("Return date cannot be in the future.");
-        return;
+        throw new IllegalArgumentException(
+            "Return date cannot be in the future."
+        );
     }
 
     this.returnDate = returnDate;
