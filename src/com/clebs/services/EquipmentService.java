@@ -74,9 +74,7 @@ for (Equipment existingEquipment : equipmentRepository.getAllEquipment()) {
     }
 }
 
-    equipmentRepository.addEquipment(equipment);
-
-    return true;
+    return equipmentRepository.addEquipment(equipment);
 }
 
     // View all equipment

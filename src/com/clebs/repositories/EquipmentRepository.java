@@ -13,8 +13,18 @@ public EquipmentRepository() {
 }
 
 /// Add equipment
-public void addEquipment(Equipment equipment) {
+public boolean addEquipment(Equipment equipment) {
+
+    if (equipment == null) {
+        return false;
+    }
+
+    if (findEquipmentById(equipment.getEquipmentId()) != null) {
+        return false;
+    }
+
     equipmentList.add(equipment);
+    return true;
 }
 
 // View all equipment

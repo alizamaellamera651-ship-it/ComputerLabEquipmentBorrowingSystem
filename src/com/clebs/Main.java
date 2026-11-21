@@ -73,9 +73,9 @@ public class Main {
 
         Student student = new Student(
                 "USER-001",
-                "Sample Student",
-                "student",
-                "student123",
+                "Aliza Mae Llamera",
+                "alizamae",
+                "alizamae123",
                 "2026-001",
                 "BS Information Technology",
                 "1st Year"
@@ -84,7 +84,7 @@ public class Main {
         LaboratoryAdministrator administrator =
                 new LaboratoryAdministrator(
                         "USER-002",
-                        "Sample Administrator",
+                        "Administrator",
                         "admin",
                         "admin123",
                         "EMP-001",
