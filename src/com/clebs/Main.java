@@ -74,8 +74,8 @@ public class Main {
         Student student = new Student(
                 "USER-001",
                 "Aliza Mae Llamera",
-                "alizamae",
-                "alizamae123",
+                "student",
+                "student123",
                 "2026-001",
                 "BS Information Technology",
                 "1st Year"
