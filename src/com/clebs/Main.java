@@ -78,7 +78,7 @@ public class Main {
         "student123",
         "2026-001",
         "BS Information Technology",
-        "1st Year"
+        "2nd Year"
 );
 
         LaboratoryAdministrator administrator =
