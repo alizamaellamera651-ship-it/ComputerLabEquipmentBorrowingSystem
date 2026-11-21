@@ -28,12 +28,9 @@ public User login(String username, String password) {
 
     User user = userRepository.authenticate(username, password);
 
-    if (user != null) {
-        System.out.println("Login successful. Welcome, "
-                + user.getFullName() + "!");
-    } else {
-        System.out.println("Invalid username or password.");
-    }
+   if (user == null) {
+    System.out.println("Invalid username or password.");
+   }
 
     return user;
 }
