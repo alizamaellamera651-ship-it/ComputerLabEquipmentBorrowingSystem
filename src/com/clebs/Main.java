@@ -72,14 +72,14 @@ public class Main {
         // ==================================
 
         Student student = new Student(
-                "USER-001",
-                "Aliza Mae Llamera",
-                "student",
-                "student123",
-                "2026-001",
-                "BS Information Technology",
-                "1st Year"
-        );
+        "USER-001",
+        "Aliza Mae Llamera",
+        "aliza",
+        "student123",
+        "2026-001",
+        "BS Information Technology",
+        "1st Year"
+);
 
         LaboratoryAdministrator administrator =
                 new LaboratoryAdministrator(
