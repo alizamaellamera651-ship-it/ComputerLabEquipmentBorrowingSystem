@@ -84,17 +84,33 @@ public class StudentView {
         ArrayList<Equipment> equipmentList =
                 equipmentController.getAllEquipment();
 
-        System.out.println("\n========== AVAILABLE EQUIPMENT ==========");
+        System.out.println("\n================ AVAILABLE EQUIPMENT ================");
+
+        System.out.printf("%-8s %-25s %-18s %-12s %-12s%n",
+                "ID", "EQUIPMENT NAME", "CATEGORY", "QUANTITY", "CONDITION");
+
+        System.out.println("------------------------------------------------------"
+                + "----------------");
 
         boolean found = false;
 
         for (Equipment equipment : equipmentList) {
 
             if (equipment.isAvailable()) {
-                equipment.displayEquipmentInfo();
+
+                System.out.printf("%-8s %-25s %-18s %-12d %-12s%n",
+                        equipment.getEquipmentId(),
+                        equipment.getEquipmentName(),
+                        equipment.getCategory(),
+                        equipment.getQuantity(),
+                        equipment.getCondition());
+
                 found = true;
             }
         }
+
+        System.out.println("------------------------------------------------------"
+                + "----------------");
 
         if (!found) {
             System.out.println("No equipment is currently available.");
@@ -102,44 +118,45 @@ public class StudentView {
     }
 
     // Borrow equipment
-private void borrowEquipment() {
+    private void borrowEquipment() {
 
-    viewAvailableEquipment();
+        viewAvailableEquipment();
 
-    System.out.print("\nEnter Equipment ID: ");
-    String equipmentId = scanner.nextLine();
+        System.out.print("\nEnter Equipment ID: ");
+        String equipmentId = scanner.nextLine().trim();
 
-    Equipment equipment =
-            equipmentController.searchEquipment(equipmentId);
+        Equipment equipment =
+                equipmentController.searchEquipment(equipmentId);
 
-    if (equipment == null) {
-        System.out.println("Equipment not found.");
-        return;
+        if (equipment == null) {
+            System.out.println("Equipment not found.");
+            return;
+        }
+
+        if (!equipment.isAvailable()) {
+            System.out.println("Equipment is unavailable.");
+            return;
+        }
+
+        // Create borrowing transaction
+        BorrowingTransaction transaction =
+                new BorrowingTransaction(
+                        null,
+                        student,
+                        equipment,
+                        LocalDate.now(),
+                        null,
+                        "Borrowed"
+                );
+
+        // Record borrowing transaction
+        borrowingController.borrowEquipment(transaction);
+
+        System.out.println("\nBorrowing successful!");
+        System.out.println("Your Transaction ID: "
+                + transaction.getTransactionId());
     }
 
-    if (!equipment.isAvailable()) {
-        System.out.println("Equipment is unavailable.");
-        return;
-    }
-
-    // Create borrowing transaction
-    BorrowingTransaction transaction =
-            new BorrowingTransaction(
-                    null,
-                    student,
-                    equipment,
-                    LocalDate.now(),
-                    null,
-                    "Borrowed"
-            );
-
-    // Record borrowing transaction
-    borrowingController.borrowEquipment(transaction);
-
-    System.out.println("\nBorrowing successful!");
-    System.out.println("Your Transaction ID: "
-            + transaction.getTransactionId());
-}
     // View borrowing history
     private void viewBorrowingHistory() {
 
@@ -163,7 +180,7 @@ private void borrowEquipment() {
     private void returnEquipment() {
 
         System.out.print("\nEnter Transaction ID: ");
-        String transactionId = scanner.nextLine();
+        String transactionId = scanner.nextLine().trim();
 
         boolean returned =
                 borrowingController.returnEquipment(transactionId);
@@ -177,8 +194,7 @@ private void borrowEquipment() {
     private int readChoice() {
 
         try {
-            int choice = Integer.parseInt(scanner.nextLine());
-            return choice;
+            return Integer.parseInt(scanner.nextLine().trim());
 
         } catch (NumberFormatException e) {
             return -1;
