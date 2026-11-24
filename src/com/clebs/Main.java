@@ -110,19 +110,7 @@ equipmentController.addEquipment(
     new Equipment("3", "Mouse", "Peripheral", 20, "Good")
 );
 
-System.out.println("\n--- EQUIPMENT CHECK ---");
 
-System.out.println("Total equipment: "
-        + equipmentController.getAllEquipment().size());
-
-for (Equipment equipment : equipmentController.getAllEquipment()) {
-    System.out.println(
-            equipment.getEquipmentId() + " - "
-            + equipment.getEquipmentName()
-            + " | Quantity: " + equipment.getQuantity()
-            + " | Available: " + equipment.isAvailable()
-    );
-}
 System.out.println("\n--- EQUIPMENT DIAGNOSTIC ---");
 
 System.out.println("Total equipment stored: "
