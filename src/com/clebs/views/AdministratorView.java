@@ -87,62 +87,81 @@ public class AdministratorView {
         ArrayList<Equipment> equipmentList =
                 equipmentController.getAllEquipment();
 
-        System.out.println("\n========== EQUIPMENT LIST ==========");
+        System.out.println("\n========================== EQUIPMENT LIST ==========================");
 
         if (equipmentList.isEmpty()) {
             System.out.println("No equipment records found.");
             return;
         }
 
+        displayEquipmentTable(equipmentList);
+    }
+
+    // Display equipment in table format
+    private void displayEquipmentTable(ArrayList<Equipment> equipmentList) {
+
+        System.out.printf("%-8s %-25s %-18s %-12s %-12s%n",
+                "ID", "EQUIPMENT NAME", "CATEGORY", "QUANTITY", "CONDITION");
+
+        System.out.println("---------------------------------------------------------------------");
+
         for (Equipment equipment : equipmentList) {
-            equipment.displayEquipmentInfo();
+
+            System.out.printf("%-8s %-25s %-18s %-12d %-12s%n",
+                    equipment.getEquipmentId(),
+                    equipment.getEquipmentName(),
+                    equipment.getCategory(),
+                    equipment.getQuantity(),
+                    equipment.getCondition());
+        }
+
+        System.out.println("---------------------------------------------------------------------");
+    }
+
+    // Add equipment
+    private void addEquipment() {
+
+        System.out.println("\n========== ADD EQUIPMENT ==========");
+
+        System.out.print("Equipment ID: ");
+        String id = scanner.nextLine().trim();
+
+        System.out.print("Equipment Name: ");
+        String name = scanner.nextLine().trim();
+
+        System.out.print("Category: ");
+        String category = scanner.nextLine().trim();
+
+        System.out.print("Quantity: ");
+        int quantity = readChoice();
+
+        if (quantity < 0) {
+            System.out.println("Invalid quantity.");
+            return;
+        }
+
+        System.out.print("Condition: ");
+        String condition = scanner.nextLine().trim();
+
+        Equipment equipment = new Equipment(
+                id, name, category, quantity, condition);
+
+        boolean added = equipmentController.addEquipment(equipment);
+
+        if (added) {
+            System.out.println("Equipment added successfully.");
+        } else {
+            System.out.println("Unable to add equipment.");
         }
     }
 
-  
-   // Add equipment
-private void addEquipment() {
-
-    System.out.println("\n========== ADD EQUIPMENT ==========");
-
-    System.out.print("Equipment ID: ");
-    String id = scanner.nextLine();
-
-    System.out.print("Equipment Name: ");
-    String name = scanner.nextLine();
-
-    System.out.print("Category: ");
-    String category = scanner.nextLine();
-
-    System.out.print("Quantity: ");
-    int quantity = readChoice();
-
-    if (quantity < 0) {
-        System.out.println("Invalid quantity.");
-        return;
-    }
-
-    System.out.print("Condition: ");
-    String condition = scanner.nextLine();
-
-    Equipment equipment = new Equipment(
-            id, name, category, quantity, condition);
-
-    boolean added = equipmentController.addEquipment(equipment);
-
-    if (added) {
-        System.out.println("Equipment added successfully.");
-    } else {
-        System.out.println("Unable to add equipment.");
-    }
-}
     // Update equipment
     private void updateEquipment() {
 
         System.out.println("\n========== UPDATE EQUIPMENT ==========");
 
         System.out.print("Enter Equipment ID: ");
-        String id = scanner.nextLine();
+        String id = scanner.nextLine().trim();
 
         Equipment equipment =
                 equipmentController.searchEquipment(id);
@@ -153,10 +172,10 @@ private void addEquipment() {
         }
 
         System.out.print("New Equipment Name: ");
-        String name = scanner.nextLine();
+        String name = scanner.nextLine().trim();
 
         System.out.print("New Category: ");
-        String category = scanner.nextLine();
+        String category = scanner.nextLine().trim();
 
         System.out.print("New Quantity: ");
         int quantity = readChoice();
@@ -167,7 +186,7 @@ private void addEquipment() {
         }
 
         System.out.print("New Condition: ");
-        String condition = scanner.nextLine();
+        String condition = scanner.nextLine().trim();
 
         boolean updated = equipmentController.updateEquipment(
                 id, name, category, quantity, condition);
@@ -180,26 +199,26 @@ private void addEquipment() {
     }
 
     // Delete equipment
-private void deleteEquipment() {
+    private void deleteEquipment() {
 
-    System.out.println("\n========== DELETE EQUIPMENT ==========");
+        System.out.println("\n========== DELETE EQUIPMENT ==========");
 
-    System.out.print("Enter Equipment ID: ");
-    String id = scanner.nextLine();
+        System.out.print("Enter Equipment ID: ");
+        String id = scanner.nextLine().trim();
 
-    Equipment equipment = equipmentController.searchEquipment(id);
+        Equipment equipment = equipmentController.searchEquipment(id);
 
-    if (equipment == null) {
-        System.out.println("Equipment not found.");
-        return;
+        if (equipment == null) {
+            System.out.println("Equipment not found.");
+            return;
+        }
+
+        boolean deleted = equipmentController.deleteEquipment(id);
+
+        if (deleted) {
+            System.out.println("Equipment deleted successfully.");
+        }
     }
-
-    boolean deleted = equipmentController.deleteEquipment(id);
-
-    if (deleted) {
-        System.out.println("Equipment deleted successfully.");
-    }
-}
 
     // View all borrowing transactions
     private void viewAllTransactions() {
@@ -225,7 +244,7 @@ private void deleteEquipment() {
         System.out.println("\n========== PROCESS EQUIPMENT RETURN ==========");
 
         System.out.print("Enter Transaction ID: ");
-        String transactionId = scanner.nextLine();
+        String transactionId = scanner.nextLine().trim();
 
         boolean returned =
                 borrowingController.returnEquipment(transactionId);
@@ -235,15 +254,15 @@ private void deleteEquipment() {
         }
     }
 
-    // Read menu choice
-private int readChoice() {
+    // Read menu choice safely
+    private int readChoice() {
 
-    try {
-        return Integer.parseInt(scanner.nextLine().trim());
+        try {
+            return Integer.parseInt(scanner.nextLine().trim());
 
-    } catch (NumberFormatException e) {
-        System.out.println("Invalid input. Please enter a number.");
-        return -1;
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            return -1;
+        }
     }
-}
 }
