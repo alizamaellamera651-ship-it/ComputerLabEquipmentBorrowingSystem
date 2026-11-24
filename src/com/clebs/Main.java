@@ -98,35 +98,9 @@ public class Main {
         // 5. ADD SAMPLE EQUIPMENT
         // ==================================
 
-        equipmentController.addEquipment(
-                new Equipment(
-                        "EQ-001",
-                        "Desktop Computer",
-                        "Computer",
-                        10,
-                        "Good"
-                )
-        );
-
-        equipmentController.addEquipment(
-                new Equipment(
-                        "EQ-002",
-                        "Keyboard",
-                        "Peripheral",
-                        15,
-                        "Good"
-                )
-        );
-
-        equipmentController.addEquipment(
-                new Equipment(
-                        "EQ-003",
-                        "Mouse",
-                        "Peripheral",
-                        20,
-                        "Good"
-                )
-        );
+       new Equipment("1", "Desktop Computer", "Computer", 10, "Good");
+new Equipment("2", "Keyboard", "Peripheral", 15, "Good");
+new Equipment("3", "Mouse", "Peripheral", 20, "Good");
 
         // ==================================
         // 6. INITIALIZE VIEWS
