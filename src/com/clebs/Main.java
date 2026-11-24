@@ -98,10 +98,17 @@ public class Main {
         // 5. ADD SAMPLE EQUIPMENT
         // ==================================
 
-       new Equipment("1", "Desktop Computer", "Computer", 10, "Good");
-new Equipment("2", "Keyboard", "Peripheral", 15, "Good");
-new Equipment("3", "Mouse", "Peripheral", 20, "Good");
+       equipmentController.addEquipment(
+    new Equipment("1", "Desktop Computer", "Computer", 10, "Good")
+);
 
+equipmentController.addEquipment(
+    new Equipment("2", "Keyboard", "Peripheral", 15, "Good")
+);
+
+equipmentController.addEquipment(
+    new Equipment("3", "Mouse", "Peripheral", 20, "Good")
+);
         // ==================================
         // 6. INITIALIZE VIEWS
         // ==================================
