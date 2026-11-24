@@ -123,6 +123,19 @@ for (Equipment equipment : equipmentController.getAllEquipment()) {
             + " | Available: " + equipment.isAvailable()
     );
 }
+System.out.println("\n--- EQUIPMENT DIAGNOSTIC ---");
+
+System.out.println("Total equipment stored: "
+        + equipmentController.getAllEquipment().size());
+
+for (Equipment equipment : equipmentController.getAllEquipment()) {
+    System.out.println(
+            equipment.getEquipmentId() + " - "
+            + equipment.getEquipmentName()
+            + " | Quantity: " + equipment.getQuantity()
+            + " | Available: " + equipment.isAvailable()
+    );
+}
         // ==================================
         // 6. INITIALIZE VIEWS
         // ==================================
